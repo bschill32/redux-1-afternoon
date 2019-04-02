@@ -1,14 +1,16 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import RecipeCard from "./../RecipeCard/RecipeCard";
-import "./Home.css";
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+import store from "../../store"
+import RecipeCard from "./../RecipeCard/RecipeCard"
+import "./Home.css"
 
 class Home extends Component {
   constructor(props) {
-    super(props);
+    super(props)
+    const reduxState = store.getState()
     this.state = {
-      recipes: []
-    };
+      recipes: reduxState.recipes
+    }
   }
 
   render() {
@@ -23,8 +25,8 @@ class Home extends Component {
           ingredients={recipe.ingredients}
           instructions={recipe.instructions}
         />
-      );
-    });
+      )
+    })
     return (
       <div className="Home">
         <Link to="/add/name">
@@ -32,8 +34,8 @@ class Home extends Component {
         </Link>
         <div className="card_container">{recipes}</div>
       </div>
-    );
+    )
   }
 }
 
-export default Home;
+export default Home

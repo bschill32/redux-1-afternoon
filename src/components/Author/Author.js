@@ -1,28 +1,38 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import './Author.css';
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+import store, { UPDATE_AUTHOR_FIRST, UPDATE_AUTHOR_LAST } from "../../store"
+import "./Author.css"
 
 class Author extends Component {
   constructor(props) {
-    super(props);
+    super(props)
+    const reduxState = store.getState()
     this.state = {
-      authorFirst: '',
-      authorLast: ''
-    };
+      authorFirst: reduxState.authorFirst,
+      authorLast: reduxState.authorLast
+    }
   }
 
   handleAuthorFirstChange(nameVal) {
     this.setState({
       authorFirst: nameVal
-    });
+    })
   }
 
   handleAuthorLastChange(nameVal) {
     this.setState({
       authorLast: nameVal
-    });
+    })
   }
   saveChanges() {
+    store.dispatch({
+      type: UPDATE_AUTHOR_FIRST,
+      payload: this.state.authorFirst
+    })
+    store.dispatch({
+      type: UPDATE_AUTHOR_LAST,
+      payload: this.state.authorLast
+    })
     // Send data to Redux state
   }
   render() {
@@ -53,8 +63,8 @@ class Author extends Component {
           </button>
         </Link>
       </div>
-    );
+    )
   }
 }
 
-export default Author;
+export default Author
